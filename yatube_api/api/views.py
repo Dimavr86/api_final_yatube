@@ -2,7 +2,10 @@ from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import filters, viewsets
 from rest_framework.pagination import LimitOffsetPagination
-from rest_framework.permissions import IsAuthenticatedOrReadOnly
+from rest_framework.permissions import (
+    IsAuthenticated,
+    IsAuthenticatedOrReadOnly
+)
 
 from posts.models import Group, Post
 from .permissions import IsAuthor
@@ -50,9 +53,10 @@ class FollowViewSet(viewsets.ModelViewSet):
     serializer_class = FollowSerializer
     filter_backends = (filters.SearchFilter,)
     search_fields = ('following__username',)
+    permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        user = get_object_or_404(User, username=self.request.user.username)
+        user = get_object_or_404(User, user=self.request.user)
         queryset = user.follower.all()
         return queryset
 
