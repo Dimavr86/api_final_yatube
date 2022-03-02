@@ -53,7 +53,7 @@ class FollowViewSet(viewsets.ModelViewSet):
 
     def get_queryset(self):
         user = self.request.user
-        return user.following.all()
+        return user.follower.all()
 
     def perform_create(self, serializer):
         username = serializer.validated_data.get('following')
