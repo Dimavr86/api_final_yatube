@@ -22,7 +22,7 @@ User = get_user_model()
 class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
-    permission_classes = [IsAuthenticatedOrReadOnly]
+    permission_classes = [IsAuthenticatedOrReadOnly, IsAuthor]
     pagination_class = LimitOffsetPagination
 
     def perform_create(self, serializer):
