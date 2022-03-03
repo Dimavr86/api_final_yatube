@@ -22,7 +22,7 @@ User = get_user_model()
 class PostViewSet(viewsets.ModelViewSet):
     serializer_class = PostSerializer
     queryset = Post.objects.all()
-    permission_classes = [IsAuthor]
+    permission_classes = [IsAuthenticatedOrReadOnly]
     pagination_class = LimitOffsetPagination
 
     def perform_create(self, serializer):
@@ -56,9 +56,8 @@ class FollowViewSet(viewsets.ModelViewSet):
     permission_classes = [IsAuthenticated]
 
     def get_queryset(self):
-        user = get_object_or_404(User, user=self.request.user)
-        queryset = user.follower.all()
-        return queryset
+        user = self.request.user
+        return user.follower.all()
 
     def perform_create(self, serializer):
         username = serializer.validated_data.get('following')
