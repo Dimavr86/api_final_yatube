@@ -1,7 +1,7 @@
 from django.contrib.auth import get_user_model
 from django.shortcuts import get_object_or_404
 from rest_framework import filters, viewsets
-from rest_framework.generics import ListAPIView, ListCreateAPIView
+from rest_framework.generics import ListCreateAPIView
 from rest_framework.pagination import LimitOffsetPagination
 from rest_framework.permissions import (
     IsAuthenticated,
@@ -45,9 +45,9 @@ class CommentViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user, post=post)
 
 
-class GroupAPIView(ViewSetMixin, ListAPIView):
-    serializer_class = GroupSerializer
-    queryset = Group.objects.all()
+class GroupViewSet(viewsets.ReadOnlyModelViewSet): 
+    serializer_class = GroupSerializer 
+    queryset = Group.objects.all() 
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
