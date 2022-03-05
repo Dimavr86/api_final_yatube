@@ -1,4 +1,4 @@
-from api.views import CommentViewSet, FollowViewSet, GroupViewSet, PostViewSet
+from api.views import CommentViewSet, FollowAPIView, GroupAPIView, PostViewSet
 from django.urls import include, path
 from rest_framework import routers
 from rest_framework_simplejwt.views import (TokenObtainPairView,
@@ -8,8 +8,8 @@ app_name = 'api'
 
 router = routers.DefaultRouter()
 router.register('posts', PostViewSet, basename='posts')
-router.register('groups', GroupViewSet, basename='groups')
-router.register('follow', FollowViewSet, basename='follow')
+router.register('groups', GroupAPIView, basename='groups')
+router.register('follow', FollowAPIView, basename='follow')
 router.register(r'posts/(?P<post_id>\d+)/comments',
                 CommentViewSet, basename='comments')
 
