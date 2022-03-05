@@ -45,9 +45,9 @@ class CommentViewSet(viewsets.ModelViewSet):
         serializer.save(author=self.request.user, post=post)
 
 
-class GroupViewSet(viewsets.ReadOnlyModelViewSet): 
-    serializer_class = GroupSerializer 
-    queryset = Group.objects.all() 
+class GroupViewSet(viewsets.ReadOnlyModelViewSet):
+    serializer_class = GroupSerializer
+    queryset = Group.objects.all()
     permission_classes = [IsAuthenticatedOrReadOnly]
 
 
