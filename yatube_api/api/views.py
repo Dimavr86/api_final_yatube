@@ -7,7 +7,7 @@ from rest_framework.permissions import (
     IsAuthenticated,
     IsAuthenticatedOrReadOnly
 )
-from rest_framework.viewsets import ModelViewSet, ViewSetMixin
+from rest_framework.viewsets import ViewSetMixin
 
 from posts.models import Group, Post
 from .permissions import IsAuthorOrReadOnly
